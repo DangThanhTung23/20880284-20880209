@@ -140,32 +140,31 @@
 					
 					$songay = date_diff($date1,$ngaydatphong);
 					
-					$songaythue += ($valuemd['songaythue'] - $songay->days);
+					$songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
 					
 				}
 				elseif($valuemd['ngaydatphong']>=$tungay&&$valuemd['ngayketthuc']>$denngay)
 				{
 					$ngayketthuc = date_create($valuemd['ngayketthuc']);
 					$songay = date_diff($ngayketthuc,$date2);
-					$songaythue = ($valuemd['songaythue'] - $songay->days);
+					$songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
 					
 				}
 				elseif($valuemd['ngaydatphong']<$tungay&&$valuemd['ngayketthuc']>$denngay)
 				{
 					$ngaydatphong = date_create($valuemd['ngaydatphong']);
 					$songay = date_diff($date1,$ngaydatphong);
-					$songaythue += ($valuemd['songaythue'] - $songay->days);
+					$songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
 					$ngayketthuc = date_create($valuemd['ngayketthuc']);
 					$songay = date_diff($ngayketthuc,$date2);
-					$songaythue += ($valuemd['songaythue'] - $songay->days);
+					$songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
 					
 				}
 				else{
-					$songaythue+=$valuemd['songaythue'];
-					
+					$songaythue = $songaythue + $valuemd['songaythue'];		
 				}
-				//echo $songaythue.$value['tenphong'].'cc';
 			}
+			//echo $songaythue.$value['tenphong'].' ';
 			$matdosudung = $songaythue/$tongsongay*100;
 			$dp_mdsdp.='<tr>
 					      <td>'.$value['tenphong'].'</td>

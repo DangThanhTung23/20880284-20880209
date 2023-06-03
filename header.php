@@ -19,13 +19,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item ml-3">
-                            <a class="nav-link text-dark" href="index">Trang chủ</a>
+                            <a class="nav-link text-dark" href="index.php">Trang chủ</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link text-dark" href="index?action=datphong">Đặt phòng</a>
+                            <a class="nav-link text-dark" href="index.php?action=datphong">Đặt phòng</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link text-dark" href="index?action=lienhe">Liên hệ</a>
+                            <a class="nav-link text-dark" href="index.php?action=lienhe">Liên hệ</a>
                         </li>
                         
                        <!--  <li class='nav-item' style="float: right;">
@@ -35,7 +35,7 @@
                     </ul>
                 </div>
                 <div class="row">
-                    <a class="nav-link text-dark" href="login">Đăng nhập</a>
+                    <a class="nav-link text-dark" href="login.php">Đăng nhập</a>
                 </div>
             </div>
         </nav>

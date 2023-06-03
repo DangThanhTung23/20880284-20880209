@@ -46,7 +46,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{title}}</title>
+    <title>Quản lý khách sạn</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>
 <header>
@@ -86,7 +86,7 @@
     <div class="container mt-5" style="width: 40%;">
       <div class="tab-content">
       <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-        <form action="login" method="post">
+        <form action="login.php" method="post">
           <div class="text-center mb-5 mt-3">
             <h1 class="mt-5 mb-5">Đăng nhập</h1>
 
@@ -114,7 +114,7 @@
 
             <div class="col-md-6 d-flex justify-content-center">
               <!-- Simple link -->
-              <a href="#!">Forgot password?</a>
+              <!-- <a href="#!">Forgot password?</a> -->
             </div>
           </div>
 

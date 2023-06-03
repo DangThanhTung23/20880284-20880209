@@ -1,9 +1,11 @@
 <?php
+	//var_dump($_SESSION);
 	$username = $_SESSION['user'];
 	$pass = $_SESSION['pass'];
 	$u = new userModel($conn);
       
     $arr = $u->timkiemuser($username,$pass);
+	//var_dump($arr);
     $tb = "";
 	//var_dump($arr);
 	//$dsrole = userModel::$dsrole ;

@@ -44,6 +44,11 @@
 		else{
 			$tb="Dữ liệu nhập có vấn đề";
 		}
+		if($_POST['user']==$_SESSION['user'])
+		{
+			$_SESSION['user'] = $_POST['user'];
+			$_SESSION['pass'] = $_POST['pass'];
+		}
 		
 	}	
 				

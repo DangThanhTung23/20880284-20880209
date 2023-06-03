@@ -221,6 +221,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 			unset($_SESSION['role']);
 			unset($_SESSION['user']);
 			unset($_SESSION['pass']);
+			//session_unset();
 			break;
 
 		

@@ -6,6 +6,10 @@
 			$username = "root";
 			$password = "";
 			$db = "quanlykhachsan";
+			// $servername = "sql304.epizy.com";
+			// $username = "epiz_33257338";
+			// $password = "6Twob1hDW3FO98q";
+			// $db = "epiz_33257338_QuanLyKhachSan";
 			$this->conn = new mysqli($servername, $username, $password,$db);
 			  // set the PDO error mode to exception
 			  echo $this->conn->connect_error;

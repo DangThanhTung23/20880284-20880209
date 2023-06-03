@@ -11,7 +11,7 @@
 	include("header.php");
 	$conn = new database();
 
-	$title = "";
+	$title = "Quản lý khách sạn";
 	$body = "";
 	$action = "";
 	if(isset($_GET['action']))
@@ -27,8 +27,7 @@
 
 		case "lienhe":
 			break;
-
-		case
+			
 		
 		default:
 			break;

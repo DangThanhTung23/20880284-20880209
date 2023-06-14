@@ -1,4 +1,5 @@
 <?php
+	include('lib/function.php');
 	$today = date('Y-m-d');
 
 	//đọc ds phòng

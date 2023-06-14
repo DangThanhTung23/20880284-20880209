@@ -59,11 +59,11 @@
             <li><a href="index.php?action=lienhe">Liên hệ</a></li>
         </div>
         <div class="nav-menu">
-            <li><a class="nav-link text-dark" href="login.php">Đăng nhập</a></li>
+            <li><a class="nav-link text-white" href="login.php">Đăng nhập</a></li>
         </div>
 </div>
 
-<body style="background-image: url(images/bg_home.jpg); background-size: cover;">
+<body class="main-head" style="background-image: url(images/bg.jpg);">
     <div class="container mt-5" style="width: 40%;">
       <div class="tab-content">
       <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
@@ -111,7 +111,7 @@
     </div>
   </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white">
         <div class="container">
             &copy; 2023 - 20880284_20880209 - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

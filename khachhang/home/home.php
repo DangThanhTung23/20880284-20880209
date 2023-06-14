@@ -5,8 +5,8 @@
             
         </div>
         <div class="m-btn">
-            <a href="index.php?p=datphong">
-                <button>Book Room</button>
+            <a href="index.php?action=datphong">
+                <button>Đặt Phòng</button>
             </a>
         </div>
     </div>

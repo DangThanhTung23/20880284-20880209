@@ -48,40 +48,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quản lý khách sạn</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    <a class="navbar-brand" href="index">Quản Lý Khách Sạn</a>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item ml-3">
-                            <a class="nav-link text-dark" href="index.php">Trang chủ</a>
-                        </li>
-                        <li class="nav-item ml-3">
-                            <a class="nav-link text-dark" href="index.php?action=datphong">Đặt phòng</a>
-                        </li>
-                        <li class="nav-item ml-3">
-                            <a class="nav-link text-dark" href="index.php?action=lienhe">Liên hệ</a>
-                        </li>
-                        
-                       <!--  <li class='nav-item' style="float: right;">
-                            <a class="nav-link text-dark" href="index?action=login">Đăng nhập</a>
-                        </li> -->
-                        
-                    </ul>
-                </div>
-                <div class="row">
-                    <a class="nav-link text-dark" href="login">Đăng nhập</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+<div class="navbar">
+        <!-- <div class-"logo"><img src="images/logo.png" alt=""></div> -->
+        <img style="width: 50px;" src="images/logo.png" alt="">
+        <div class="nav-menu">
+            <li><a href="index.php?action=home">Trang chủ</a></li>
+            <li><a href="index.php?action=datphong">Đặt Phòng</a></li>
+            <li><a href="index.php?action=lienhe">Liên hệ</a></li>
+        </div>
+        <div class="nav-menu">
+            <li><a class="nav-link text-dark" href="login.php">Đăng nhập</a></li>
+        </div>
+</div>
+
 <body style="background-image: url(images/bg_home.jpg); background-size: cover;">
     <div class="container mt-5" style="width: 40%;">
       <div class="tab-content">
@@ -132,7 +113,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - _20880284_20880209 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2023 - 20880284_20880209 - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

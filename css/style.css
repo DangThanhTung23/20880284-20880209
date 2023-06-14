@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: #8b99a7;
+    position: sticky;
+    
+}
+.logo{
+    font: 10px;
+    letter-spacing: 2px;
+    color:crimson;
+}
+.logo img{
+    width: 100px;
+}
+.nav-menu li{
+    display: inline-block;
+    padding: 10px 20px;
+}
+.nav-menu li a{
+    color: white;
+}
+.nav-menu li a:hover{
+    color: #80ffff;
+}
+.main-head{
+    height: 140vh;
+    background-size: cover;
+    color: white;
+    height: 100vh;
+    background-position: center;
+    background-blend-mode: darken;
+    line-height: 2;
+}
+.banner{
+    top: 30%;
+    left: 40%;
+    position: absolute;
+    color: snow;
+}
+.banner h1{
+    font-size: 70px;
+}
+.banner h2{
+    font-size: 40px;
+}
+.banner m-btn{
+    color: #d9d9d9;
+    padding: 20px;
+}
+.m-btn{
+    top: 85%;
+    left: 40%;
+    position: absolute;
+    line-height: 1.0;
+}
+.m-btn button{
+    background-color: #daedce;
+    color: #14e34f;
+    padding: 10px 30px;
+    border: 1px solid;
+    border-radius: 15px;
+}
+.m-btn a:hover button{
+    background-color: #d2e314;
+    color: white;
+}
+.m-container{
+    width: 80%;
+    margin: 20px auto;
+    justify-content: space-around;
+}
+.m-container h1{
+    text-align: center;
+    color: darkgray;
+}
+.m-row{
+    display: flex;
+}
+.m-col-md-4{
+    display: inline-block;
+    width:30%;
+    margin: 1%;
+    padding: 20px;
+}
+.service_home{
+    text-align: justify;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px black;
+}
+.clr{
+    margin-top: 20px;
+    clear: both;
+    text-align: center;
+}
+.m-footer{
+    background-color: #8b99a7;
+    height: 100px;
+    line-height: 100px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+}

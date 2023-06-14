@@ -4,7 +4,13 @@
 	include "models/loaiphongModel.php";
 	include "models/trangthaiModel.php";
 	include "models/userModel.php";
-	include "lib/function.php";
+	include "models/datphongModel.php";
+	include "models/p_dpModel.php";
+	include "models/loaikhachhangModel.php";
+	include "models/hoadonModel.php";
+	include "models/thamsoModel.php";
+	include "models/loaithanhtoanModel.php";
+	include "models/p_hdModel.php";
 	ob_start();
 	session_start();
 
@@ -20,8 +26,13 @@
 	}
 
 	switch ($action) {
-		
+		case "home":
+			include('khachhang/home/home.php');
+			break;
+			
 		case "datphong":
+			include('khachhang/datphong/XL_datphong.php');
+			include('khachhang/datphong/load_datphong.php');
 			break;
 
 
@@ -30,6 +41,7 @@
 			
 		
 		default:
+			include('khachhang/home/home.php');
 			break;
 	}
 	$conn->close_conn();

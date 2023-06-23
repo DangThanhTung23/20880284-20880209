@@ -1,10 +1,12 @@
 </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - _20880284_20880209 - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- <div class="m-footer">
+        <footer class="border-top footer text-white">
+            <div class="container">
+                &copy; 2023 - 20880284_20880209 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div> -->
 
     
     <!-- Thư viện jQuery (dammio.com) -->

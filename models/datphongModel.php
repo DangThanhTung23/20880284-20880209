@@ -1,6 +1,6 @@
 <?php
 	
-	class datphongModel
+	class datphongModel extends connect
 	{
 		public $id;
 		public $tenkhachhang;
@@ -16,7 +16,7 @@
 		public $conn;
 		
 	
-		public function __construct($conn)
+		public function __construct()
 		{
 			$this->thanhtoan = 0;
 			$this->tenkhachhang="";
@@ -31,7 +31,7 @@
 			$this->loaikhachID=1;
 		
 			$this->id = 0;
-			$this->conn = $conn;
+			
 		}
 		public function luudp()
 		{	
@@ -39,7 +39,7 @@
 				VALUES ('$this->id','$this->tenkhachhang','$this->ngaydatphong','$this->ngayketthuc','$this->diachikhachhang',$this->thanhtoan,
 					'$this->CMND','$this->sdt',$this->soluongnguoi,$this->loaikhachID);";
 				
-				return $this->conn->set_data($sql);
+				return $this->set_data($sql);
 			
 		}
 		public function docdanhsachdp()
@@ -47,7 +47,7 @@
 			
 			$sql = "select * from datphong order by isActive,ngayketthuc DESC";
 				
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 
 		}
@@ -55,30 +55,33 @@
 		{
 			$sql = "DELETE FROM datphong WHERE ID = $id;";
 			
-			$this->conn->set_data($sql);
+			$this->set_data($sql);
 		}
 		public function xoadatphongtheoid($id)
 		{
 			$sql = "select isActive from datphong where ID='$id'";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
+			if(count($ds)>0)
+			{
+				$isActive = $ds[0]['isActive'];
+				if((int)$isActive==0)
+				{
+					$sql = "UPDATE phong SET trangthaiID = 1 WHERE phongID in (SELECT p_dp.phongID from p_dp,datphong WHERE datphong.ID = p_dp.datphongID and datphong.ID = '$id');";
+					$this->set_data($sql);
+					$sql = "DELETE FROM datphong WHERE ID = '$id';";
+					$this->set_data($sql);
+					$sql = "DELETE FROM p_dp WHERE datphongID='$id';";
+					$this->set_data($sql);
+				}
+				else
+				{
+					$sql = "DELETE FROM datphong WHERE ID = '$id';";
+					$this->set_data($sql);
+					$sql = "DELETE FROM p_dp WHERE datphongID='$id';";
+					$this->set_data($sql);
+				}
+			}
 			
-			$isActive = $ds[0]['isActive'];
-			if((int)$isActive==0)
-			{
-				$sql = "UPDATE phong SET trangthaiID = 1 WHERE phongID in (SELECT p_dp.phongID from p_dp,datphong WHERE datphong.ID = p_dp.datphongID and datphong.ID = '$id');";
-				$this->conn->set_data($sql);
-				$sql = "DELETE FROM datphong WHERE ID = '$id';";
-				$this->conn->set_data($sql);
-				$sql = "DELETE FROM p_dp WHERE datphongID='$id';";
-				$this->conn->set_data($sql);
-			}
-			else
-			{
-				$sql = "DELETE FROM datphong WHERE ID = '$id';";
-				$this->conn->set_data($sql);
-				$sql = "DELETE FROM p_dp WHERE datphongID='$id';";
-				$this->conn->set_data($sql);
-			}
 			//return $this->conn->set_data($sql);
 		}
 
@@ -86,7 +89,7 @@
 		public function timkiemtheoID($id)
 		{
 			$sql = "select * from datphong where ID = '$id';";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			foreach ($ds as $key => $value) {
 				$this->id = $value["ID"];
 				$this->tenkhachhang = $value["tenkhachhang"];
@@ -108,7 +111,7 @@
 		{
 			$sql = "UPDATE phong SET trangthaiID=2 WHERE phongID=$id";
 		
-			$this->conn->set_data($sql);
+			$this->set_data($sql);
 		} 
 
 		
@@ -118,7 +121,7 @@
 			$sql = "UPDATE datphong SET tenkhachhang = '$this->tenkhachhang' ,ngaydatphong = '$this->ngaydatphong',ngayketthuc = '$this->ngayketthuc',diachikhachhang='$this->diachikhachhang',CMND='$this->CMND',sdt='$this->sdt',loaikhachID=$this->loaikhachID
 				WHERE ID='$this->id'";
 			
-			return $this->conn->set_data($sql);
+			return $this->set_data($sql);
 		}
 		// public function kiemtra()
 		// {
@@ -140,14 +143,29 @@
 		public function timkiem($key){
 			$sql = "select * from datphong where tenkhachhang like '%$key%' or CMND like '%$key%' ; ";
 			//echo $sql;
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 		public function thaydoiActive($id)
 		{
 			$sql = "UPDATE datphong SET isActive = 1 where ID = '$id';";
 			//echo $sql;
-			return $this->conn->set_data($sql);
+			return $this->set_data($sql);
+		}
+		public function phantrang($p,$key,$limit,&$count)
+		{
+			$offset = $limit*$p;
+			$sql = "select count(ID) as count from datphong where tenkhachhang like '%$key%' or CMND like '%$key%';";
+			$ds = $this->get_data($sql);
+			//var_dump($ds);
+			$count = $ds[0]['count'];
+			
+			$sql = "select * from datphong where tenkhachhang like '%$key%' or CMND like '%$key%' ORDER BY isActive, ngayketthuc DESC LIMIT $limit OFFSET $offset;";
+				$ds = $this->get_data($sql);
+			//echo $sql;
+			//var_dump($ds);
+			return $ds;
+			
 		}
 
 	}

@@ -4,16 +4,21 @@
   $dp_mdsdp = "";
   $tb = "";
   $tungay = "";
-  $phong = new phongModel($conn);
+  $phong = new phongModel();
   $tongdoanhthu = 0;
+  $conn = new connect();
 
   $denngay = date('Y-m-d');
   if(isset($_POST['btn_thongke'])&&$_POST['btn_thongke'])
   {
   	$tungay = $_POST['tungay'];
   	$denngay = $_POST['denngay'];
-
-  	if($_POST['tungay']!=""&&$_POST['denngay']!="")
+	$chk_ngay = false;
+	if($tungay<=$denngay)
+	{
+		$chk_ngay = true;
+	}
+  	if($_POST['tungay']!=""&&$_POST['denngay']!=""&&$chk_ngay==true)
   	{
   		//Tính tổng doanh thu
   		$sql = "select * from hoadon where ngayketthuc between '$tungay' and '$denngay'";
@@ -51,7 +56,13 @@
 				$thanhtien*=$valuett['phuthuloaikhach'];
 				$doanhthu+=$thanhtien;
 			}
-			$tile = $doanhthu/$tongdoanhthu*100;
+			if($tongdoanhthu!=0)
+			{
+				$tile = $doanhthu/$tongdoanhthu*100;
+			}
+			else{
+				$tile = 0;
+			}
 			$dp_dttp.='<tr>
 					      <td>'.$value['tenphong'].'</td>
 					      <td>'.$doanhthu.'</td>
@@ -64,7 +75,7 @@
 
 
 		//doanh thu theo loai phong
-		$lp = new loaiphongModel($conn);
+		$lp = new loaiphongModel();
 		$sql = "select * from loaiphong";
   		$dsloaiphong = $lp->docdanhsachloaiphong();
   		
@@ -93,7 +104,13 @@
 				$doanhthu+=$thanhtien;
 			}
 			
-			$tile = $doanhthu/$tongdoanhthu*100;
+			if($tongdoanhthu!=0)
+			{
+				$tile = $doanhthu/$tongdoanhthu*100;
+			}
+			else{
+				$tile = 0;
+			}
 			$dp_dtlp.='<tr>
 					      <td>'.$value['loaiphong'].'</td>
 					      <td>'.$doanhthu.'</td>
@@ -152,12 +169,17 @@
 				}
 				elseif($valuemd['ngaydatphong']<$tungay&&$valuemd['ngayketthuc']>$denngay)
 				{
-					$ngaydatphong = date_create($valuemd['ngaydatphong']);
-					$songay = date_diff($date1,$ngaydatphong);
-					$songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
-					$ngayketthuc = date_create($valuemd['ngayketthuc']);
-					$songay = date_diff($ngayketthuc,$date2);
-					$songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
+					// $ngaydatphong = date_create($valuemd['ngaydatphong']);
+					// $songay = date_diff($date1,$ngaydatphong);
+					// $songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
+					// echo $songaythue.'<br>';
+					// $ngayketthuc = date_create($valuemd['ngayketthuc']);
+					// $songay = date_diff($ngayketthuc,$date2);
+					// $songaythue = $songaythue + ($valuemd['songaythue'] - $songay->days);
+					// echo $songaythue.'<br>';
+
+					$songaythue = $songaythue + $date_diff->days;
+					//echo $songaythue.'<br>';
 					
 				}
 				else{
@@ -165,10 +187,17 @@
 				}
 			}
 			//echo $songaythue.$value['tenphong'].' ';
-			$matdosudung = $songaythue/$tongsongay*100;
+			if($tongsongay!=0)
+			{
+				$matdosudung = $songaythue/$tongsongay*100;
+			}
+			else{
+				$matdosudung = 0;
+			}
+			
 			$dp_mdsdp.='<tr>
 					      <td>'.$value['tenphong'].'</td>
-					      <td>'.$songaythue.'</td>
+					      <td>'.$songaythue.'/'.$tongsongay.'</td>
 					      <td>'.round($matdosudung,2).'%'.'</td>
 					    </tr>';
 		}
@@ -177,7 +206,7 @@
 
   	}
   	else{
-  		$tb ="Yêu cầu chọn ngày";
+  		$tb ="Yêu cầu chọn đúng ngày";
   	}
   }
 ?>

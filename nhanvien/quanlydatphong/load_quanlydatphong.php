@@ -3,7 +3,7 @@
 
 
 <div style="width: 90%; margin: 0 auto;">
-	<form action="index.php" method="get">
+	<form action="index.php?action=quanlydatphong" method="get">
 		<div>
 			<input class="form-control" type="text" name="key" placeholder="Tìm kiếm theo tên khách hàng hoặc CMND...">
 		</div>
@@ -57,7 +57,7 @@
 						
 						<td>
 							<?php
-								$id_delete = "index.php?action=xoadp&id=".$value["ID"] ;
+								$id_delete = "index.php?action=quanlydatphong".$url_query."&xoadp=0&id=".$value["ID"] ;
 								$id_update = "index.php?action=chitiet&id=".$value["ID"];
 								$id_thanhtoan = "index.php?action=thanhtoan&id=".$value["ID"];
 							?>
@@ -71,4 +71,5 @@
 			    
 			  </tbody>
 			</table>
+			<div class="text-center"><?php echo $phantrang ?></div>
 </div>

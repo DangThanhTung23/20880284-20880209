@@ -1,5 +1,5 @@
 <?php
-	class phongModel
+	class phongModel extends connect
 	{
 		public $id;
 		public $tenphong;
@@ -10,9 +10,9 @@
 		public $conn;
 		public $loaiphongID;
 		public $trangthaiID;
-		public function __construct($conn)
+		public function __construct()
 		{
-			$this->conn = $conn;
+			
 			$this->id = 0;
 			$this->tenphong = "";
 			$this->giaphong = 0;
@@ -30,7 +30,7 @@
 				$sql = "INSERT INTO phong (tenphong, img ,giaphong, trangthaiID, loaiphongID,soluongtoida,mota)
 				VALUES ('$this->tenphong','$this->img',$this->giaphong,$this->trangthaiID,$this->loaiphongID,$this->soluongtoida,'$this->mota');";
 			
-				return $this->conn->set_data($sql);
+				return $this->set_data($sql);
 			}
 			return false;
 		}
@@ -42,7 +42,7 @@
 			
 			$sql = "select * from phong order by trangthaiID,tenphong";
 				
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 
 		}
@@ -51,7 +51,7 @@
 		public function docdanhsachphongtheotrangthai($trangthaiID)
 		{
 			$sql = "select * from phong where trangthaiID = $trangthaiID order by tenphong";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 
@@ -61,7 +61,7 @@
 		{
 			$sql = "select * from phong where tenphong LIKE '$key' order by tenphong";
 			echo $sql;
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 
@@ -71,7 +71,7 @@
 		{
 			$sql = "DELETE FROM phong WHERE phongID = $id;";
 			
-			$this->conn->set_data($sql);
+			$this->set_data($sql);
 		}
 
 
@@ -79,7 +79,7 @@
 		public function timkiemtheoID($id)
 		{
 			$sql = "select * from phong where phongID = $id;";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			
 			foreach ($ds as $key => $value) {
 				$this->id = $value["phongID"];
@@ -99,7 +99,7 @@
 			{
 				$sql = "UPDATE phong SET tenphong = '$this->tenphong' ,img = '$this->img',giaphong = $this->giaphong,trangthaiID=$this->trangthaiID,loaiphongID=$this->loaiphongID,soluongtoida=$this->soluongtoida,mota='$this->mota' WHERE phongID = $this->id;";
 			
-				return $this->conn->set_data($sql);
+				return $this->set_data($sql);
 			}
 			return false;
 		}
@@ -107,7 +107,7 @@
 		{
 			
 			$sql = "SELECT * FROM phong WHERE tenphong = '$this->tenphong' and phongID <> $this->id;";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			
 			if(count($ds)>0)
 			{
@@ -124,9 +124,32 @@
 		{
 			$sql = "UPDATE phong SET trangthaiID=1 where phongID = $id";
 			//echo $sql;
-			return $this->conn->set_data($sql);
+			return $this->set_data($sql);
+		}
+		
+		public function phantrang($p,$key,$loaiphongID,$trangthaiID,$limit,&$count)
+		{
+			$offset = $limit*$p;
+			
+			$lptt = "";
+			if($loaiphongID>0)
+			{
+				$lptt.="and loaiphongID = $loaiphongID";
+			}
+			if($trangthaiID>0)
+			{
+				$lptt.="and trangthaiID = $trangthaiID";
+			}
+			$sql = "select count(phongID) as count from phong where tenphong like '%$key%' $lptt;";
+			$ds = $this->get_data($sql);
+			//var_dump($ds);
+			$count = $ds[0]['count'];
+			$sql = "select * from phong where tenphong like '%$key%' $lptt order by trangthaiID,tenphong LIMIT $limit OFFSET $offset";
+			
+			$ds = $this->get_data($sql);
+			
+			return $ds;
 		}
 
 	}
-
  ?>

@@ -1,6 +1,7 @@
 <div class="text-center m-5"><h4>Danh mục phòng</h4></div>
 
-<form action="index.php?action=danhmucphong" method="post">
+<form action="index.php?action=danhmucphong" method="get">
+	<input type="hidden" name="action" value="danhmucphong">
 	<div class="row">
 		<div class="col col-md-6">
 			<input class="form-control" type="text" name="key" placeholder="Tìm kiếm ...">
@@ -40,7 +41,7 @@
 	<table class="table">
 			  <thead>
 			    <tr>
-			      <th scope="col"></th>
+			      
 					<th scope="col">Tên Phòng</th>
 					<th scope="col">Trạng thái</th>
 					<th scope="col">Loại Phòng</th>
@@ -55,18 +56,18 @@
 
 			    <?php foreach ($dsphong as $key => $value): ?>
 			    	<tr>
-						<th><input type="checkbox" name=""></th>
+						
 						<td><?php echo $value["tenphong"] ?></td>
 						<td>
 							<?php
-								$lp = new trangthaiModel($conn);
+								$lp = new trangthaiModel();
 								$lp->timkiemtheoID($value["trangthaiID"]);
 								echo $lp->trangthai;
 							 ?>
 						</td>
 						<td>
 							<?php
-								$lp = new loaiphongModel($conn);
+								$lp = new loaiphongModel();
 								$lp->timkiemtheoID($value["loaiphongID"]);
 								echo $lp->loaiphong;
 							 ?>
@@ -103,4 +104,6 @@
 			    
 			  </tbody>
 			</table>
+			
 </div>
+<div class="text-center"><?php echo $phantrang ?></div>

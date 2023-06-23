@@ -1,4 +1,12 @@
 <div class="text-center m-5"><h4>Danh mục User</h4></div>
+<form action="index.php?action=danhmucuser" method="get">
+		<div class="row">
+			<div class="col col-md-8">
+				<input class="form-control" type="text" name="key" placeholder="Tìm kiếm theo tên hoặc user  name...">
+			</div>
+			<div class="col col-md-4"><input type="submit" class="btn btn-success" name="btn_timkiem" value="Tìm kiếm" name=""></div>
+		</div>
+	</form>
 <a href="index.php?action=thongtinuser"><button type="submit" class="btn btn-success m-3">Thêm User</button></a>
 
 <div class="row">
@@ -58,3 +66,4 @@
 			  </tbody>
 			</table>
 </div>
+<div class="text-center"><?php echo $phantrang ?></div>

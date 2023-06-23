@@ -1,7 +1,7 @@
 <?php
 	$username = $_SESSION['user'];
 	$pass = $_SESSION['pass'];
-	$u = new userModel($conn);
+	$u = new userModel();
       
     $arr = $u->timkiemuser($username,$pass);
     $tb = "";

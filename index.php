@@ -15,7 +15,7 @@
 	session_start();
 
 	include("header.php");
-	$conn = new database();
+	//$conn = new database();
 
 	$title = "Quản lý khách sạn";
 	$body = "";
@@ -44,7 +44,7 @@
 			include('khachhang/home/home.php');
 			break;
 	}
-	$conn->close_conn();
+	
 
 	include("footer.php");
 	$header = file_get_contents("header.php");

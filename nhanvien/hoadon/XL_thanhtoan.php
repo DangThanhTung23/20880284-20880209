@@ -1,13 +1,13 @@
 <?php
 	$tb = "";
-	$dp = new datphongModel($conn);
-	$lkh = new loaikhachhangModel($conn);
+	$dp = new datphongModel();
+	$lkh = new loaikhachhangModel();
 	$dsloaikhach = $lkh->docdanhsachloaikhach();
-	$p_dp = new p_dpModel($conn);
-	$hd = new hoadonModel($conn);
-	$ts = new thamsoModel($conn);
+	$p_dp = new p_dpModel();
+	$hd = new hoadonModel();
+	$ts = new thamsoModel();
 	$ds_ts = $ts->docdanhsach();
-	$ltt = new loaithanhtoanModel($conn);
+	$ltt = new loaithanhtoanModel();
 	$ds_ltt = $ltt->docdanhsach();
 	$tb = "";
 	$songaythue = 0;

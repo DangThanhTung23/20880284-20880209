@@ -1,6 +1,6 @@
 <?php
 	
-	class userModel
+	class userModel extends connect
 	{
 		public $id;
 		public $ten;
@@ -13,11 +13,11 @@
 		public $conn;
 		public static $dsrole = [['id'=>1,'role'=>'admin'],['id'=>2,'role'=>'Quản lý']];
 	
-		public function __construct($conn)
+		public function __construct()
 		{
 			$this->role = 0;
 			$this->id = 0;
-			$this->conn = $conn;
+			
 		}
 		public function luuuser()
 		{	
@@ -28,7 +28,7 @@
 				VALUES ('$this->ten','$this->diachi','$this->email','$this->user','$this->pass',$this->role,'$this->sdt');";
 				
 			
-				return $this->conn->set_data($sql);
+				return $this->set_data($sql);
 			}
 			
 			
@@ -38,7 +38,7 @@
 			
 			$sql = "select * from user";
 				
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			//var_dump($ds);
 			return $ds;
 
@@ -47,12 +47,12 @@
 		{
 			$sql = "DELETE FROM user WHERE ID = $id;";
 			
-			$this->conn->set_data($sql);
+			$this->set_data($sql);
 		}
 		public function timkiemtheoID($id)
 		{
 			$sql = "select * from user where ID = $id;";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			foreach ($ds as $key => $value) {
 				$this->id = $value["ID"];
 				$this->ten = $value["ten"];
@@ -71,7 +71,7 @@
 			
 			$sql = "select * from user where (email = '$loginName' or user = '$loginName' ) and pass = '$pass';";
 			
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			// var_dump($ds);
 			
 			foreach ($ds as $key => $value) {
@@ -95,7 +95,7 @@
 			{
 				$sql = "UPDATE user SET ten = '$this->ten' ,diachi = '$this->diachi',email = '$this->email',user='$this->user',pass='$this->pass',role=$this->role,sdt = '$this->sdt' WHERE ID = $this->id;";
 			
-				return $this->conn->set_data($sql);
+				return $this->set_data($sql);
 			}
 			
 		}
@@ -103,7 +103,7 @@
 		{
 			
 			$sql = "SELECT * FROM user WHERE (user = '$this->user' or email='$this->email') and ID<>$this->id ;";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			
 			if(count($ds)>0)
 			{
@@ -114,6 +114,21 @@
 
 			// Đóng kết nối
 			//$conn->close();
+		}
+		public function phantrang($p,$key,$limit,&$count)
+		{
+			$offset = $limit*$p;
+			$sql = "select count(ID) as count from user where ten like '%$key%' or user like '%$key%';";
+			$ds = $this->get_data($sql);
+			//var_dump($ds);
+			$count = $ds[0]['count'];
+			
+			$sql = "select * from user where ten like '%$key%' or user like '%$key%' ORDER BY role,ten LIMIT $limit OFFSET $offset;";
+				$ds = $this->get_data($sql);
+			//echo $sql;
+			//var_dump($ds);
+			return $ds;
+			
 		}
 
 	}

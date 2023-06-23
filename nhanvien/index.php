@@ -19,8 +19,8 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 	include "../lib/function.php";
 
 	include("header.php");
-	$conn = new database();
-
+	
+	$phantrang = "";
 	$title = "";
 	$body = "";
 	$action = "";
@@ -36,13 +36,13 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 			include "quanlydatphong/load_quanlydatphong.php";
 			break;
 
-		case "xoadp":
+		// case "xoadp":
 
-			include "quanlydatphong/XL_xoadatphong.php";
-			include "quanlydatphong/XL_quanlydatphong.php";
-			include "quanlydatphong/load_quanlydatphong.php";
+		// 	include "quanlydatphong/XL_xoadatphong.php";
+		// 	include "quanlydatphong/XL_quanlydatphong.php";
+		// 	include "quanlydatphong/load_quanlydatphong.php";
 			
-			break;
+		// 	break;
 
 		case "chitiet":
 			include "quanlydatphong/XL_thongtindatphong.php";
@@ -85,10 +85,11 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 			break;
 
 
-		case "xoahoadon":
-			include "hoadon/XL_xoahoadon.php";
-			include "hoadon/load_danhmuchoadon.php";
-			break;
+		// case "xoahoadon":
+		// 	include "hoadon/XL_xoahoadon.php";
+		// 	include "hoadon/XL_danhmuchoadon.php";
+		// 	include "hoadon/load_danhmuchoadon.php";
+		// 	break;
 
 		case "thongke":
 			include "thongke/XL_thongke.php";
@@ -126,14 +127,14 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 			
 			break;
 	}
-	$conn->close_conn();
+	
 
 	
 	$header = file_get_contents("header.php");
 	$header = str_replace("{{title}}", $title, $header);
 	// $page = str_replace("{{body}}",$body,$page);
 	
-	//include "footer.php";
+	include "footer.php";
 
 	}
 	else{

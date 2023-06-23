@@ -1,9 +1,9 @@
 <?php
 	$tb = "";
-	$dp = new datphongModel($conn);
-	$lkh = new loaikhachhangModel($conn);
+	$dp = new datphongModel();
+	$lkh = new loaikhachhangModel();
 	$dsloaikhach = $lkh->docdanhsachloaikhach();
-	$p_dp = new p_dpModel($conn);
+	$p_dp = new p_dpModel();
 	$tb = "";
 
 

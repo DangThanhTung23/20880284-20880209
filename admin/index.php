@@ -13,7 +13,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 	include "../lib/function.php";
 
 	include("header.php");
-	$conn = new database();
+	
 
 	$title = "";
 	$body = "";
@@ -34,9 +34,9 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 		case "thongtinphong":
 			$title="Quản lý phòng";
 			// $body = file_get_contents("danhmucphong/add.php");
-			$p = new phongModel($conn);
-			$tt = new trangthaiModel($conn);
-			$lp = new loaiphongModel($conn);
+			$p = new phongModel();
+			$tt = new trangthaiModel();
+			$lp = new loaiphongModel();
 			$dstrangthai = $tt->docdanhsachtrangthai();
 			$dsloaiphong = $lp->docdanhsachloaiphong();
 
@@ -48,7 +48,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 		case "xoaphong":
 			if(isset($_GET["id"])&&$_GET["id"]>0)
 			{
-				$p = new phongModel($conn);
+				$p = new phongModel();
 				$p->xoaphong($_GET["id"]);
 
 			}
@@ -58,15 +58,15 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 
 		case "suaphong":
 			$tb="";
-			$p = new phongModel($conn);
-			$tt = new trangthaiModel($conn);
-			$lp = new loaiphongModel($conn);
+			$p = new phongModel();
+			$tt = new trangthaiModel();
+			$lp = new loaiphongModel();
 			$dstrangthai = $tt->docdanhsachtrangthai();
 			$dsloaiphong = $lp->docdanhsachloaiphong();
 
 			if(isset($_GET["id"])&&$_GET["id"]>0)
 			{
-				$p = new phongModel($conn);
+				$p = new phongModel();
 				$p->timkiemtheoid($_GET["id"]);
 				include "danhmucphong/load_thongtinphong.php";
 			}
@@ -81,7 +81,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 
 		case "thongtinuser":
 			// $body = file_get_contents("danhmucphong/add.php");
-			$u = new userModel($conn);
+			$u = new userModel();
 
 			$dsrole = userModel::$dsrole;
 			// var_dump($dsrole);
@@ -94,7 +94,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 		case "xoauser":
 			if(isset($_GET["id"])&&$_GET["id"]>0)
 			{
-				$u = new userModel($conn);
+				$u = new userModel();
 				$u->xoauser($_GET["id"]);
 
 			}
@@ -104,12 +104,12 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 
 		case "suauser":
 			$tb="";
-			$u = new userModel($conn);
+			$u = new userModel();
 			
 			$dsrole = userModel::$dsrole;
 			if(isset($_GET["id"])&&$_GET["id"]>0)
 			{
-				$u = new userModel($conn);
+				$u = new userModel();
 				$u->timkiemtheoid($_GET["id"]);
 				include "danhmucuser/load_thongtinuser.php";
 			}
@@ -124,7 +124,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 
 
 		case "danhmucloaiphong":
-			$lp = new loaiphongModel($conn);
+			$lp = new loaiphongModel();
 			if(isset($_POST["btn_luuloaiphong"])&&$_POST["btn_luuloaiphong"])
 			{
 				$lp->loaiphong = $_POST['loaiphong'];
@@ -142,7 +142,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 
 
 		case "xoaloaiphong":
-			$lp = new loaiphongModel($conn);
+			$lp = new loaiphongModel();
 			if(isset($_GET["id"])&&$_GET['id']>0)
 			{
 				$lp->xoaloaiphong($_GET['id']);
@@ -153,7 +153,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 
 		case "sualoaiphong":
 			if(isset($_GET["id"])&&$_GET["id"]>0){
-				$lp = new loaiphongModel($conn);
+				$lp = new loaiphongModel();
 				$lp->timkiemtheoID($_GET["id"]);
 				$txt_loaiphong = $lp->loaiphong;
 				$txt_id = $lp->id;
@@ -168,7 +168,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 
 
 		case "danhmuctrangthai":
-			$tt = new trangthaiModel($conn);
+			$tt = new trangthaiModel();
 			if(isset($_POST['btn_luutrangthai'])&&$_POST['btn_luutrangthai'])
 			{
 				$tt->trangthai = $_POST['trangthai'];
@@ -189,7 +189,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 		case "xoatrangthai":	
 			if(isset($_GET["id"])&&$_GET['id']>0)
 			{
-				$tt = new trangthaiModel($conn);
+				$tt = new trangthaiModel();
 				$tt->xoatrangthai($_GET['id']);
 			}
 			include "danhmuctrangthai/ds_trangthai.php";
@@ -200,7 +200,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 		case "suatrangthai":
 			if(isset($_GET["id"])&&$_GET["id"]>0){
 				
-				$tt = new trangthaiModel($conn);
+				$tt = new trangthaiModel();
 				$tt->timkiemtheoID($_GET["id"]);
 				$txt_trangthai = $tt->trangthai;
 				$txt_id = $tt->id;
@@ -231,8 +231,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==1)
 			$title = "Trang chủ Admin";
 			break;
 	}
-	$conn->close_conn();
-
+	
 	include("footer.php");
 	$header = file_get_contents("header.php");
 	$header = str_replace("{{title}}", $title, $header);

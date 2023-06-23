@@ -31,7 +31,7 @@
 	} 
 	function locdanhsachphong($keys,$trangthaiID,$loaiphongID)
 	{
-		$conn = new database();
+		
 		if(isset($keys)==null)
 		{
 			$key = "";
@@ -44,7 +44,7 @@
 		{
 			$loaiphongID = 0;
 		}
-		$p = new phongModel($conn);
+		$p = new phongModel();
 		$ds = $p->docdanhsachphong();
 		$ds1 = array();
 		$result = array();

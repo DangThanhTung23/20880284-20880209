@@ -8,12 +8,13 @@
   session_start();
   ob_start();
     
-    $conn = new database();
+    //$conn = new database();
+    $tb = "";
     if(isset($_POST['btn_login'])&&$_POST['btn_login'])
     { 
       $username = $_POST['loginName'];
       $pass = $_POST['loginPassword'];
-      $u = new userModel($conn);
+      $u = new userModel();
       
       $arr = $u->timkiemuser($username,$pass);
       if(count($arr)>0)
@@ -23,7 +24,7 @@
       else
       {
         $_SESSION['role'] = 0;
-        
+        $tb = "Không tìm thấy User";
       }
       if($_SESSION['role']==1)
       {
@@ -100,7 +101,8 @@
           </div>
 
           <!-- Submit button -->
-          <input type="submit" name='btn_login' class="btn btn-primary btn-block mb-4">Sign in</input>
+          <?php echo $tb ?>
+          <input type="submit" name='btn_login' class="btn btn-primary btn-block mb-4" value="Đăng nhập">Sign in</input>
 
           <!-- Register buttons -->
           <div class="text-center">

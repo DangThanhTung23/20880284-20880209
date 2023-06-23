@@ -142,7 +142,7 @@
     <div><?php echo $tb; ?></div>
     <input type="submit" class="btn btn-success mr-3" name="btn_luuhoadon" value="Xác nhận hoàn tất">
     <!-- <button class="btn btn-success mr-3" formaction="index.php?action=thanhtoan&id=<?php echo $dp->id ?>">Thanh Toán</button> -->
-    <button class="btn btn-success">In hóa đơn</button>
+    <!-- <button class="btn btn-success">In hóa đơn</button> -->
     <button class="btn btn-success" formaction="index.php?action=quanlydatphong" onclick="<?php unset($_SESSION['thanhtoan']) ?>">Thoát</button>
   </div>
 </form>

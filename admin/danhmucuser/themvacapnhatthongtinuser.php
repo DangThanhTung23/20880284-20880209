@@ -1,6 +1,6 @@
 <?php
 	$tb = "";
-	$u = new userModel($conn);
+	$u = new userModel();
 	
 	$dsrole = userModel::$dsrole ;
 	if(isset($_POST['btn_luuuser'])&&($_POST['btn_luuuser']))		

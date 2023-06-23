@@ -2,18 +2,18 @@
 	//var_dump($_SESSION);
 	//var_dump($_POST);
 	$tb = "";
-	$dp = new datphongModel($conn);
-	$lkh = new loaikhachhangModel($conn);
+	$dp = new datphongModel();
+	$lkh = new loaikhachhangModel();
 	$dsloaikhach = $lkh->docdanhsachloaikhach();
-	$p_dp = new p_dpModel($conn);
-	$hd = new hoadonModel($conn);
-	$ts = new thamsoModel($conn);
+	$p_dp = new p_dpModel();
+	$hd = new hoadonModel();
+	$ts = new thamsoModel();
 	$ds_ts = $ts->docdanhsach();
-	$ltt = new loaithanhtoanModel($conn);
+	$ltt = new loaithanhtoanModel();
 	$ds_ltt = $ltt->docdanhsach();
-	$p_hd = new p_hdModel($conn);
+	$p_hd = new p_hdModel();
 	$tb = "";
-	$p = new phongModel($conn);
+	$p = new phongModel();
 
 	$dsphong = $p_dp->timkiemphongtheoID($_GET['id']);
 

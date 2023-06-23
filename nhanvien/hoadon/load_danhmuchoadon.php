@@ -1,12 +1,12 @@
 <div style="width:90%; margin: 0 auto;">
 	<div class="text-center"><h4>Danh sách hóa đơn</h4></div>
-	<form action='index.php?action=hoadon' method="GET">
+	<form action='index.php?action=hoadon<?php echo $url_query ?>' method="GET">
 		<div class="row">
 			<div class="col col-md-4">
 				<input class="form-control" type="text" name="key" placeholder="TÌm kiếm theo tên hoặc CMND...">
 			</div>
 			<div class="col col-md-4">
-				<input class="form-control" type="date" name="tungay" value="">	
+				<input class="form-control" type="date" name="tungay" value="">
 			</div>
 			<div class="col col-md-4">
 				<input class="form-control" type="date" name="denngay" value="">
@@ -37,10 +37,11 @@
 		      <td><?php echo $value['ngayketthuc'] ?></td>
 		      <td>
 		      	<a href="index.php?action=chitiethoadon&id=<?php echo $value['ID'] ?>"><button class="btn btn-success">Chi tiết</button></a>
-		      	<a href="index.php?action=xoahoadon&id=<?php echo $value['ID'] ?>"><button class="btn btn-success">Xóa</button></a>
+		      	<a href="index.php?action=hoadon<?php echo $url_query ?>&xoahd=0&id=<?php echo $value['ID'] ?>"><button class="btn btn-success">Xóa</button></a>
 		      </td>
 		    </tr>
 	  	<?php endforeach ?>
 	  </tbody>
 	</table>
+	<div class="text-center"><?php echo $phantrang ?></div>
 </div>

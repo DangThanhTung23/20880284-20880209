@@ -1,17 +1,15 @@
 <?php
-	class thamsoModel{
+	class thamsoModel extends connect
+	{
 		public $id;
 		public $thamso;
 		public $giatri;
-		public $conn;
-		public function __construct($conn)
-		{
-			$this->conn = $conn;
-		}
+		
+		
 		public function docdanhsach()
 		{
 			$sql = "select * from thamso";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 

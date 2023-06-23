@@ -1,5 +1,6 @@
 <?php
-	class hoadonModel{
+	class hoadonModel extends connect
+	{
 		public $ID;
 		public $datphongID;
 		public $loaithanhtoan;
@@ -17,12 +18,9 @@
 		public $songaythue;
 		public $phuthuloaikhach;
 		public $CMND;
-		public $conn;
+		
 	
-		public function __construct($conn)
-		{
-			$this->conn = $conn;
-		}
+		
 		
 		public function luuhd()
 		{
@@ -32,11 +30,11 @@
 			'$this->ngaydatphong','$this->ngayketthuc','$this->diachinguoithanhtoan','$this->MST','$this->stk',$this->tongtiensauthue,
 			$this->VAT,$this->VATthanhtoan,$this->songaythue,$this->phuthuloaikhach,'$this->CMND');";
 			
-			return $this->conn->set_data($sql);
+			return $this->set_data($sql);
 		}
 		public function docdanhsach(){
 			$sql = "select * from hoadon order by ngayketthuc DESC";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 		public function timkiem($key,$tungay,$denngay){
@@ -47,24 +45,24 @@
 				$sql = "select * from hoadon where (tenkhachhang like '%$key%' or CMND like '%$key%') and (ngayketthuc between '$tungay' and 
 				'$denngay');";
 				//echo $sql;
-				$ds = $this->conn->get_data($sql);
+				$ds = $this->get_data($sql);
 			}
 			else{
 				$sql = "select * from hoadon where tenkhachhang like '%$key%' or CMND like '%$key%';";
-				$ds = $this->conn->get_data($sql);
+				$ds = $this->get_data($sql);
 			}
 			return $ds;
 		}
 		public function timkiemtheongay($tungay,$denngay)
 		{
 			$sql = "select * from hoadon where ngayketthuc between '$tungay' and '$denngay';";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 		public function timkiemtheoID($id)
 		{
 			$sql = "select * from hoadon where ID = '$id';";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			foreach ($ds as $key => $value) {
 				$this->ID = $value["ID"];
 				$this->datphongID = $value['datphongID'];
@@ -93,9 +91,40 @@
 		{
 			$sql = "DELETE FROM hoadon where ID = '$id';";
 
-			$this->conn->set_data($sql);
+			$this->set_data($sql);
 			$sql = "DELETE FROM p_hd where hoadonID = '$id';";
-			$this->conn->set_data($sql);
+			$this->set_data($sql);
+		}
+		public function phantrang($p,$key,$tungay,$denngay,$limit,&$count)
+		{
+			$offset = $limit*$p;
+			$sql = "select count(ID) as count from hoadon where tenkhachhang like '%$key%' or CMND like '%$key%';";
+			$ds = $this->get_data($sql);
+			//var_dump($ds);
+			$count = $ds[0]['count'];
+			if(isset($tungay)&&isset($denngay)&&$tungay!=''&&$denngay!='')
+			{
+
+				$sql = "select count(ID) as count from hoadon where (tenkhachhang like '%$key%' or CMND like '%$key%') and (ngayketthuc between '$tungay' and 
+				'$denngay')";
+				//echo $sql;
+				$ds = $this->get_data($sql);
+			}
+			$count = $ds[0]['count'];
+			if(isset($tungay)&&isset($denngay)&&$tungay!=''&&$denngay!='')
+			{
+
+				$sql = "select * from hoadon where (tenkhachhang like '%$key%' or CMND like '%$key%') and (ngayketthuc between '$tungay' and 
+				'$denngay') ORDER BY ngayketthuc DESC LIMIT $limit OFFSET $offset;";
+				//echo $sql;
+				$ds = $this->get_data($sql);
+			}
+			else{
+				$sql = "select * from hoadon where tenkhachhang like '%$key%' or CMND like '%$key%' ORDER BY ngayketthuc DESC LIMIT $limit OFFSET $offset;";
+				$ds = $this->get_data($sql);
+			}
+			return $ds;
+			
 		}
 		
 	}

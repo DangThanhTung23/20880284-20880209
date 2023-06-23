@@ -1,15 +1,16 @@
 <div style="width:90%;margin: 0 auto;">
-<form action="index.php?action=datphong" method="post">
-	<div class="row mt-5">
+<form action="index.php?action=datphong" method="get">
+	<div class="row mt-3">
+		<input type="hidden" name="action" value="datphong">
 		<div class="col col-md-6">
 			<input class="form-control" type="text" name="key" placeholder="Tìm kiếm ...">
 		</div>
-
+		
 		<div class="col col-md-3">
 			<div class="row">
 				<div class="form-group col col-md-5">
                     <select name="trangthaiID" class="form-control">
-                    	<option value="0">Tất cả</option>
+                    	<option value="0">Tình trạng</option>
                         <?php foreach ($dstrangthai as $key => $value): ?>
                             <option class="form-control" value="<?php echo $value["ID"] ?>"><?php echo $value["trangthai"] ?></option>
                         <?php endforeach ?>        
@@ -17,7 +18,7 @@
 	             </div>
 	             <div class="form-group col col-md-5">
 	                    <select name="loaiphongID" class="form-control">
-	                    	<option value="0">Tất cả</option>
+	                    	<option value="0">Loại phòng</option>
 	                        <?php foreach ($dsloaiphong as $key => $value): ?>
 	                            <option class="form-control" value="<?php echo $value["ID"] ?>"><?php echo $value["loaiphong"]; ?></option>
 	                        <?php endforeach ?>
@@ -28,6 +29,7 @@
 		<div class="col col-md-4 mb-2">
 			<input type="submit" class="btn btn-success" name="btn_timkiem" value="Tìm kiếm" name="">
 		</div>
+		
 	</div>
 	
 </form>
@@ -35,21 +37,21 @@
 
 
 
-<div class='row'>
+<div class='row mt-3'>
 	<div class="col col-md-8">
-		<div class="row mt-5">
+		<div class="row">
 			<?php foreach ($dsphong as $key => $value): ?>
 				<div class="col col-md-6 p-3">
-					<form action="index.php?action=datphong" method="post">
+					<form action="index.php?action=datphong<?php echo $url_query ?>" method="post">
 						<div class="card" style="height: 100%;">
 							<div style="width: 100%;">
 								<img src="<?php echo $value["img"] ?>" class="card-img-top" alt="...">
 							</div>
-						  <!-- <img src="../<?php echo $value["img"] ?>" class="card-img-top" alt="..."> -->
+						  <!-- <img src="<?php echo $value["img"] ?>" class="card-img-top" alt="..."> -->
 						  <div class="card-body">
 						    <h5 class="card-title" name="tenphong"><?php echo $value["tenphong"]; ?></h5>
 						    <p class="card-text" name="soluongtoida"><b>Số lượng tối đa : <?php echo $value["soluongtoida"]; ?></b></p>
-						    <p class="card-text"><b>Giá Phòng : <?php echo $value['giaphong']; ?></b></p>
+						    <p class="card-text"><b>Giá Phòng : <?php echo $value['giaphong']; ?> Đ</b></p>
 						    <p class="card-text">Loại phòng : <?php foreach ($dsloaiphong as $keylp => $lp) {
 						    	if($lp['ID']==$value['loaiphongID'])	echo $lp['loaiphong'];
 						    } ?></p>
@@ -75,11 +77,12 @@
 				</div>
 			<?php endforeach ?>
 		</div>
+		<div class="text-center"><?php echo $phantrang ?></div>
 		
 	</div>
 	<div class="col col-md-4 mt-3">
 			<div class="p-2">
-				<form class="mt-3" action="index.php?action=datphong" method="post">
+				<form class="mt-3" action="index.php?action=datphong<?php echo $url_query ?>" method="post">
 					<div class="border p-5 mb-3" style="border-radius: 10px;">
 						<div class="text-center mb-5">
 							<h4 class="">Đặt phòng</h4>
@@ -126,8 +129,8 @@
 			</div>
 		</div>
 		</div>
-		
 	</div>
 </div>
+
 </div>
 	

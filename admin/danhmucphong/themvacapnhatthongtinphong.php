@@ -1,8 +1,8 @@
 <?php
 	$tb = "";
-	$p = new phongModel($conn);
-	$tt = new trangthaiModel($conn);
-	$lp = new loaiphongModel($conn);
+	$p = new phongModel();
+	$tt = new trangthaiModel();
+	$lp = new loaiphongModel();
 	$dstrangthai = $tt->docdanhsachtrangthai();
 	$dsloaiphong = $lp->docdanhsachloaiphong();
 	if(isset($_POST['btn_luuphong'])&&($_POST['btn_luuphong']))		

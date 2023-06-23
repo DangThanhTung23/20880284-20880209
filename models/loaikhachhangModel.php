@@ -1,13 +1,13 @@
 <?php
-	class loaikhachhangModel{
+	class loaikhachhangModel extends connect
+	{
 		public $loaikhachID;
 		public $loaikhach;
-		public $conn;
-		public function __construct($conn)
+		
+		public function __construct()
 		{
 			$this->loaikhachID = 0;
 			$this->loaikhach = "";
-			$this->conn = $conn;
 		}
 		// public function luutrangthai(object $conn)
 		// {
@@ -71,7 +71,7 @@
 		public function docdanhsachloaikhach()
 		{
 			$sql = "select * from loaikhachhang";
-			$dsloaikh = $this->conn->get_data($sql);
+			$dsloaikh = $this->get_data($sql);
 			return $dsloaikh;
 		}
 		// public function xoatrangthai($id)

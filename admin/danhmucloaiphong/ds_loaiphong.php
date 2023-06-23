@@ -1,6 +1,6 @@
 <?php
 	//Hiển thị danh sách
-	$lp = new loaiphongModel($conn);
+	$lp = new loaiphongModel();
 	$dsloaiphong = $lp->docdanhsachloaiphong();
 
  ?>

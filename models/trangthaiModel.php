@@ -1,13 +1,14 @@
 <?php
-	class trangthaiModel{
+	class trangthaiModel extends connect
+	{
 		public $id;
 		public $trangthai;
-		public $conn;
-		public function __construct($conn)
+		
+		public function __construct()
 		{
 			$this->id = 0;
 			$this->trangthai = "";
-			$this->conn = $conn;
+			
 		}
 		// public function luutrangthai(object $conn)
 		// {
@@ -52,7 +53,7 @@
 				$sql = "INSERT INTO trangthai (trangthai)
 				VALUES ('$this->trangthai');";
 				
-				return $this->conn->set_data($sql);
+				return $this->set_data($sql);
 			}
 			return false;
 		}
@@ -64,25 +65,25 @@
 					SET trangthai = '$this->trangthai'
 					WHERE ID = $this->id;";
 			
-				return $this->conn->set_data($sql);
+				return $this->set_data($sql);
 			}
 			return false;
 		}
 		public function docdanhsachtrangthai()
 		{
 			$sql = "select * from trangthai";
-			$dstrangthai = $this->conn->get_data($sql);
+			$dstrangthai = $this->get_data($sql);
 			return $dstrangthai;
 		}
 		public function xoatrangthai($id)
 		{
 			$sql = "DELETE FROM trangthai WHERE ID = $id;";
-			$this->conn->set_data($sql);
+			$this->set_data($sql);
 		}
 		public function timkiemtheoID($id)
 		{
 			$sql = "select * from trangthai where ID = $id;";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			
 			foreach ($ds as $key => $value) {
 				$this->id = $value["ID"];
@@ -98,7 +99,7 @@
 			// Chuỗi truy vấn SQL để kiểm tra dữ liệu
 			$sql = "SELECT * FROM trangthai WHERE trangthai = '$this->trangthai'";
 			
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			
 			if(count($ds)>0)
 			{

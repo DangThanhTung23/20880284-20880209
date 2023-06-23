@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quản lý</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
+        <!-- <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
             <div class="container">
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -43,6 +45,33 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> -->
+        <div class="navbar mb-3 text-white">
+        <!-- <div class-"logo"><img src="images/logo.png" alt=""></div> -->
+        <img style="width: 50px;" src="../images/logo.png" alt="">
+        <div class="nav-menu">
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=datphong">Đặt phòng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=quanlydatphong">Quản lý đặt phòng</a>
+            </li>
+                        
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=hoadon">Hóa đơn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=thongke">Thống kê</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=taikhoan">Tài khoản</a>
+            </li>
+        </div>
+        <div class="row">
+            <span class="pt-2"><?php  echo $_SESSION['user'] ?></span><a class="ml-3" href="index?action=exitNhanvien"><button class="btn btn-outline-light my-2 my-sm-0 text-white">
+                Thoát
+            </button></a>
+        </div>
+    </div>
     </header>
     <div>

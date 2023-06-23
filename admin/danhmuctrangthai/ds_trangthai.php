@@ -14,7 +14,7 @@
 
 
 	//Hiển thị danh sách
-	$tt = new trangthaiModel($conn);
-	$dstrangthai = $tt->docdanhsachtrangthai($conn);
+	$tt = new trangthaiModel();
+	$dstrangthai = $tt->docdanhsachtrangthai();
 	
  ?>

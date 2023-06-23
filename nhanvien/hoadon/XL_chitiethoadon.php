@@ -1,6 +1,6 @@
 <?php
-	$hd = new hoadonModel($conn);
-	$p_hd = new p_hdModel($conn);
+	$hd = new hoadonModel();
+	$p_hd = new p_hdModel();
 
 	if(isset($_GET['id']))
 	{

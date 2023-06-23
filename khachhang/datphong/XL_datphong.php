@@ -1,20 +1,20 @@
 <?php
-	include('lib/function.php');
 	$today = date('Y-m-d');
 
 	//đọc ds phòng
-	$p = new phongModel($conn);
+	$p = new phongModel();
 	//$dsphong = $p->docdanhsachphong();
 	//$dsphong = $p->docdanhsachphong();
 	//đọc danh sách trạng thái
-	$tt = new trangthaiModel($conn);
-	$dstrangthai = $tt->docdanhsachtrangthai($conn);
-	$lp = new loaiphongModel($conn);
+	$tt = new trangthaiModel();
+	$dstrangthai = $tt->docdanhsachtrangthai();
+	$lp = new loaiphongModel();
 	$dsloaiphong = $lp->docdanhsachloaiphong();
-	$lkh = new loaikhachhangModel($conn);
+	$lkh = new loaikhachhangModel();
 	$dsloaikhach = $lkh->docdanhsachloaikhach();
 	$dsdp = array();
-	
+	$url_query = "";
+	//var_dump($url_request);
 	
 	$key = "";
 	$trangthaiID = 0;
@@ -25,6 +25,10 @@
 	{
 		$_SESSION['datphong'] = array();
 		
+	}
+	if(!isset($_SESSION['thanhtoan']))
+	{
+		$_SESSION['thanhtoan'] = 0;
 	}
 
 
@@ -105,8 +109,8 @@
 		//var_dump($_SESSION['datphong']);
 
 		$dsdp = $_SESSION['datphong'];
-		$dp = new datphongModel($conn);
-		$p_dp = new p_dpModel($conn);
+		$dp = new datphongModel();
+		$p_dp = new p_dpModel();
 		$chk_p_dp = false;
 		$dp->tenkhachhang = $_POST['tenkhachhang'];
 		$dp->ngaydatphong = $_POST['ngaydatphong'];
@@ -180,21 +184,46 @@
 		$tbdp = "Chưa có phòng được chọn";
 	}
 
-
-
-
-	if(isset($_POST['btn_timkiem'])&&$_POST['btn_timkiem'])
+	$page = 0;
+	if(!isset($_GET['p']))
 	{
-		$trangthaiID = $_POST['trangthaiID'];
-		$loaiphongID = $_POST['loaiphongID'];
-		$key = $_POST['key'];
-		$dsphong = locdanhsachphong($key,$trangthaiID,$loaiphongID);
+		$page = 0;
 	}
-	else
+	else{
+		$page = $_GET['p'];
+		$url_query = $url_query."&p=".$_GET['p'];
+	}
+	$key = "";
+	$trangthaiID = 0;
+	$loaiphongID = 0;
+	if(isset($_GET['btn_timkiem'])&&$_GET['btn_timkiem'])
 	{
-		{
-			$dsphong = $p->docdanhsachphong();
-		}
+		
+		$trangthaiID = $_GET['trangthaiID'];
+		$loaiphongID = $_GET['loaiphongID'];
+		$key = $_GET['key'];
+		//$dsphong = locdanhsachphong($key,$trangthaiID,$loaiphongID);
+		$url_query = $url_query."&key=".$key."&trangthaiID=".$trangthaiID."&loaiphongID=".$loaiphongID."&btn_timkiem=Tìm+kiếm";
 	}
+	// else
+	// {
+	// 	{
+	// 		$dsphong = $p->docdanhsachphong();
+	// 		include('../lib/phantrang.php');
+	// 		$url = 'index.php?action=datphong';
+			
+	// 		$phantrang = phantrang(count($dsphong),$url,6);
+	// 	}
+	// }
+	$limit = 4;
+	$count = 0;
+	$phantrang = "";
+	
+	$dsphong = $p->phantrang($page,$key,$loaiphongID,$trangthaiID,$limit,$count);
+	//var_dump($dsphong);
+	//$dstoanbophong = $p->docdanhsachphong();
+	include('lib/phantrang.php');
+	$url = 'index.php?action=datphong'.$url_query;	
+	$phantrang = phantrang($count,$url,$limit);
  ?>
  

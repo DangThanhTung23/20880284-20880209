@@ -1,5 +1,6 @@
 <?php
-	class p_hdModel{
+	class p_hdModel extends connect
+	{
 		public $ID;
 		public $hoadonID;
 		public $tenphong;
@@ -10,12 +11,7 @@
 		public $thanhtien;
 		public $songaythue;
 		public $phongID;
-		public $conn;
-	
-		public function __construct($conn)
-		{
-			$this->conn = $conn;
-		}
+		
 		
 		public function luup_hd()
 		{
@@ -23,18 +19,18 @@
 			('$this->hoadonID','$this->tenphong','$this->loaiphong',$this->giaphong,$this->soluongkhach,$this->phuthusoluong,$this->thanhtien,
 			$this->songaythue,$this->phongID);";
 			//echo $sql;
-			return $this->conn->set_data($sql);
+			return $this->set_data($sql);
 		}
 		public function timkiemtheoID($id)
 		{
 			$sql = "select * from p_hd where hoadonID = '$id';";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 		public function timkiemtheoIDphong($id)
 		{
 			$sql = "select * from p_hd where phongID = '$id';";
-			$ds = $this->conn->get_data($sql);
+			$ds = $this->get_data($sql);
 			return $ds;
 		}
 	}

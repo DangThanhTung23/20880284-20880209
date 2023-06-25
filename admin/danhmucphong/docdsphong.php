@@ -47,7 +47,7 @@
 	if(isset($_GET['btn_timkiem'])&&$_GET['btn_timkiem'])
 	{
 		
-		$trangthaiID = $_GET['trangthaiID'];
+		//$trangthaiID = $_GET['trangthaiID'];
 		$loaiphongID = $_GET['loaiphongID'];
 		$key = $_GET['key'];
 		//$dsphong = locdanhsachphong($key,$trangthaiID,$loaiphongID);
@@ -67,7 +67,7 @@
 	$count = 0;
 	$phantrang = "";
 	
-	$dsphong = $p->phantrang($page,$key,$loaiphongID,$trangthaiID,$limit,$count);
+	$dsphong = $p->phantrang($page,$key,$loaiphongID,"","",$limit,$count);
 	//var_dump($dsphong);
 	//$dstoanbophong = $p->docdanhsachphong();
 	include('../lib/phantrang.php');

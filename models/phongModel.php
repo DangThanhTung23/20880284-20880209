@@ -127,29 +127,65 @@
 			return $this->set_data($sql);
 		}
 		
-		public function phantrang($p,$key,$loaiphongID,$trangthaiID,$limit,&$count)
+		
+		public function phantrang($p,$key,$loaiphongID,$tungay,$denngay,$limit,&$count)
 		{
+			
 			$offset = $limit*$p;
 			
-			$lptt = "";
+			$sql_tk = "where tenphong like '%$key%'";
+
 			if($loaiphongID>0)
 			{
-				$lptt.="and loaiphongID = $loaiphongID";
+				$sql_tk.=" and loaiphongID=$loaiphongID";
 			}
-			if($trangthaiID>0)
+			
+			if($tungay!=""&&$denngay!=""&&$tungay<=$denngay)
 			{
-				$lptt.="and trangthaiID = $trangthaiID";
+				// $sql_tk.=" and phongID not in 
+				// (SELECT p_dp.phongID from p_dp,datphong  where datphong.isActive=0 
+				// AND ((datphong.ngaydatphong BETWEEN '$tungay' AND '$denngay') OR (datphong.ngayketthuc BETWEEN '$tungay' and '$denngay')) 
+				// AND p_dp.datphongID = datphong.ID)";
+				// $sql_tk.=" and phongID not in 
+				// (SELECT p_dp.phongID from p_dp,datphong  where datphong.isActive=0 
+				// AND ((datphong.ngaydatphong BETWEEN '$tungay' AND '$denngay') OR (datphong.ngayketthuc BETWEEN '$tungay' and '$denngay')
+				// OR (datphong.ngaydatphong >= '$tungay' AND datphong.ngayketthuc <= '$denngay'))
+				// AND p_dp.datphongID = datphong.ID)";
+				$sql_tk.=" and phongID not in 
+				(SELECT p_dp.phongID from p_dp,datphong  where ((datphong.ngaydatphong <= '$tungay' AND datphong.ngayketthuc >= '$tungay') 
+				OR (datphong.ngaydatphong <= '$denngay' and datphong.ngayketthuc>='$denngay')
+				OR (datphong.ngaydatphong >= '$tungay' AND datphong.ngayketthuc <= '$denngay'))
+				AND p_dp.datphongID = datphong.ID)";
 			}
-			$sql = "select count(phongID) as count from phong where tenphong like '%$key%' $lptt;";
+			
+			$sql = "SELECT count(phongID) as count FROM phong $sql_tk";
+			//echo $sql;
 			$ds = $this->get_data($sql);
 			//var_dump($ds);
 			$count = $ds[0]['count'];
-			$sql = "select * from phong where tenphong like '%$key%' $lptt order by trangthaiID,tenphong LIMIT $limit OFFSET $offset";
-			
+			$sql = "SELECT * FROM phong $sql_tk ORDER BY tenphong LIMIT $limit OFFSET $offset";
+			//echo $sql;
 			$ds = $this->get_data($sql);
-			
+			//var_dump($ds);
 			return $ds;
 		}
-
+		public static function kiemtratrangthaiphongtheongay($id,$tungay,$denngay)
+		{
+			$conn = new connect();
+			$sql = "select * from phong,datphong,p_dp where
+			((datphong.ngaydatphong <= '$tungay' AND datphong.ngayketthuc >= '$tungay') 
+				OR (datphong.ngaydatphong <= '$denngay' and datphong.ngayketthuc>='$denngay')
+				OR (datphong.ngaydatphong >= '$tungay' AND datphong.ngayketthuc <= '$denngay'))
+				AND p_dp.datphongID = $id AND phong.phongID = p_dp.ID";
+			echo $sql;
+			$ds = $conn->get_data($sql);
+			var_dump($ds);
+			
+			if(count($ds)>0)
+			{
+				return false;
+			}
+			return true;
+		}
 	}
  ?>

@@ -106,6 +106,10 @@
 			$ds = $this->get_data($sql);
 			return $ds;
 		}
+		function kiemtrathoigiandatphong($tungay,$denngay)
+		{
+			
+		}
 	}
 
  ?>

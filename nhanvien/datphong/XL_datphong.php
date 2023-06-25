@@ -17,8 +17,10 @@
 	//var_dump($url_request);
 	
 	$key = "";
-	$trangthaiID = 0;
-	$loaiphongID = 0;
+	$tungay = "";
+	$denngay = "";
+	$ht_tungay = $today;
+	$ht_denngay = $today;
 	$tbdp="";
 	
 	if(!isset($_SESSION['datphong']))
@@ -54,10 +56,11 @@
 					'trangthaiID'=>$_POST['trangthaiID'],
 				];
 			$kt = true;
-			if($phong['trangthaiID']==2||$phong['trangthaiID']==3)
-			{
-				$kt = false;
-			}
+			// if($phong['trangthaiID']==2||$phong['trangthaiID']==3)
+			// {
+			// 	$kt = false;
+			// }
+			//$kt = $p->kiemtratrangthaiphong($_POST['phongID'],$tungay,$denngay);
 			//var_dump($p);
 			foreach ($_SESSION['datphong'] as $key => $value) {
 				if($value['phongID']==$phong['phongID']){
@@ -122,6 +125,7 @@
 		$dp->loaikhachID = $_POST['loaikhachID'];
 		$date = date("ymd-His");
 		$dp->id = $date;
+		$kt = true;
 		if(!$_SESSION['thanhtoan'])
 		{
 			$dp->thanhtoan = 0;
@@ -129,7 +133,19 @@
 		else{
 			$dp->thanhtoan = $_SESSION['thanhtoan'];
 		}
-		if($dp->tenkhachhang!=""&&$dp->CMND!=""&&$dp->sdt!=""&&!empty($dsdp))
+		$kt = true;
+		foreach ($dsdp as $key => $value) {
+			$kt = phongModel::kiemtratrangthaiphongtheongay($value['phongID'],$_POST['ngaydatphong'],$_POST['ngayketthuc']);
+				
+			//var_dump($kt);
+			if($kt==false)
+			{
+				$tbdp = 'Phòng '.$_POST['tenphong'].' đã được đặt<br> từ ngày '.$_POST['ngaydatphong'].' đến ngày '.$_POST['ngayketthuc'];
+				break;
+			}
+		}
+		
+		if($dp->tenkhachhang!=""&&$dp->CMND!=""&&$dp->sdt!=""&&!empty($dsdp)&&$kt)
 		{	
 			//$dp->luudp();
 			foreach ($dsdp as $key => $value) {
@@ -142,16 +158,24 @@
 					$chk_p_dp = true;
 				}
 				$dp->thaydoitrangthaidatphong($value['phongID']);
-
+				
 			}
 			if($dp->luudp()&&$chk_p_dp)
-			{
-				unset($_SESSION['datphong']);
-				$tbxndp = "Bạn đã đăng ký thành công";
-			}
-			else{
-				$tbxndp = "Yêu cầu nhập đủ thông tin";
-			}
+				{
+					unset($_SESSION['datphong']);
+					$tbxndp = "Bạn đã đăng ký thành công";
+				}
+				else{
+					$tbxndp = "Yêu cầu nhập đủ thông tin";
+				}
+			// if($dp->luudp()&&$chk_p_dp)
+			// {
+			// 	unset($_SESSION['datphong']);
+			// 	$tbxndp = "Bạn đã đăng ký thành công";
+			// }
+			// else{
+			// 	$tbxndp = "Yêu cầu nhập đủ thông tin";
+			// }
 		}
 		else{
 			$tbxndp = "Yêu cầu nhập đủ thông tin";
@@ -198,13 +222,16 @@
 	$loaiphongID = 0;
 	if(isset($_GET['btn_timkiem'])&&$_GET['btn_timkiem'])
 	{
-		
-		$trangthaiID = $_GET['trangthaiID'];
+		//var_dump($_GET);
+		$tungay = $_GET['tungay'];
+		$denngay = $_GET['denngay'];
 		$loaiphongID = $_GET['loaiphongID'];
-		$key = $_GET['key'];
 		//$dsphong = locdanhsachphong($key,$trangthaiID,$loaiphongID);
-		$url_query = $url_query."&key=".$key."&trangthaiID=".$trangthaiID."&loaiphongID=".$loaiphongID."&btn_timkiem=Tìm+kiếm";
+		$url_query = $url_query."&loaiphongID=".$loaiphongID."&tungay=".$tungay."&denngay=".$denngay."&btn_timkiem=Tìm+kiếm";
+		$ht_tungay = $tungay;
+		$ht_denngay = $denngay;
 	}
+	
 	// else
 	// {
 	// 	{
@@ -219,7 +246,8 @@
 	$count = 0;
 	$phantrang = "";
 	
-	$dsphong = $p->phantrang($page,$key,$loaiphongID,$trangthaiID,$limit,$count);
+	
+	$dsphong = $p->phantrang($page,"",$loaiphongID,$tungay,$denngay,$limit,$count);
 	//var_dump($dsphong);
 	//$dstoanbophong = $p->docdanhsachphong();
 	include('../lib/phantrang.php');

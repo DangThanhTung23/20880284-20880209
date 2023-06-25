@@ -56,9 +56,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="index.php?action=danhmucloaiphong">Quản lý loại phòng</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link text-white" href="index.php?action=danhmuctrangthai">Quản lý trạng thái</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link text-white" href="index.php?action=taikhoan">Tài khoản</a>
                         </li>

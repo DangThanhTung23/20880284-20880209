@@ -1,22 +1,22 @@
 <div style="width:90%;margin: 0 auto;">
 <form action="index.php?action=datphong" method="get">
-	<div class="row">
+	<div class="row mt-5">
 		<input type="hidden" name="action" value="datphong">
-		<div class="col col-md-6">
+		<!-- <div class="col col-md-6">
 			<input class="form-control" type="text" name="key" placeholder="Tìm kiếm ...">
+		</div> -->
+		<div class="col col-md-4 mb-3">
+			<div><label class="form-label" for="">Ngày đặt phòng</label></div>
+			<div><input class="form-control" name="tungay" type="date" value="<?php echo $ht_tungay ?>"></div>
 		</div>
-		
-		<div class="col col-md-3">
-			<div class="row">
-				<div class="form-group col col-md-5">
-                    <select name="trangthaiID" class="form-control">
-                    	<option value="0">Tình trạng</option>
-                        <?php foreach ($dstrangthai as $key => $value): ?>
-                            <option class="form-control" value="<?php echo $value["ID"] ?>"><?php echo $value["trangthai"] ?></option>
-                        <?php endforeach ?>        
-                    </select>
-	             </div>
-	             <div class="form-group col col-md-5">
+		<div class="col col-md-4 mb-3">
+			<div><label class="form-label" for="">Ngày kết thúc</label></div>
+			<div><input class="form-control" name="denngay" type="date" value="<?php echo $ht_denngay ?>"></div>
+		</div>
+		<div class="col col-md-4 mb-3">
+			
+			<div><label class="form-label" for="">Loại phòng</label></div>
+	             <div>
 	                    <select name="loaiphongID" class="form-control">
 	                    	<option value="0">Loại phòng</option>
 	                        <?php foreach ($dsloaiphong as $key => $value): ?>
@@ -24,13 +24,11 @@
 	                        <?php endforeach ?>
 	                    </select>
 	            </div>
-			</div>
 		</div>
-		<div class="col col-md-4 mb-2">
+	</div>
+	<div class="row ml-1">
 			<input type="submit" class="btn btn-success" name="btn_timkiem" value="Tìm kiếm" name="">
 		</div>
-		
-	</div>
 	
 </form>
 
@@ -47,7 +45,7 @@
 							<div style="width: 100%;">
 								<img src="../<?php echo $value["img"] ?>" class="card-img-top" alt="...">
 							</div>
-						  <!-- <img src="../<?php echo $value["img"] ?>" class="card-img-top" alt="..."> -->
+						  <!-- <img src="<?php echo $value["img"] ?>" class="card-img-top" alt="..."> -->
 						  <div class="card-body">
 						    <h5 class="card-title" name="tenphong"><?php echo $value["tenphong"]; ?></h5>
 						    <p class="card-text" name="soluongtoida"><b>Số lượng tối đa : <?php echo $value["soluongtoida"]; ?></b></p>
@@ -115,10 +113,10 @@
 				    <input type="text" class="form-control" name="diachi" placeholder="Địa chỉ">
 				  </div>
 				  <div class="form-group">
-				  	<input type="date" name="ngaydatphong" class="form-control" value="<?php echo $today; ?>">
+				  	<input type="date" name="ngaydatphong" class="form-control" value="<?php echo $ht_tungay; ?>">
 				  </div>
 				  <div class="form-group">
-				  	<input type="date" name="ngayketthuc" class="form-control" value="<?php echo $today; ?>">
+				  	<input type="date" name="ngayketthuc" class="form-control" value="<?php echo $ht_denngay; ?>">
 				  </div>
 				  <div><?php echo $tbxndp ?></div>
 				  <div class="row float-right">

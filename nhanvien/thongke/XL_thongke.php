@@ -24,7 +24,7 @@
   		$sql = "select * from hoadon where ngayketthuc between '$tungay' and '$denngay'";
   		$ds_hd = $conn->get_data($sql);
   		foreach ($ds_hd as $key => $value) {
-  			$tongdoanhthu += $value['tongtienthanhtoan'];
+  			$tongdoanhthu += $value['tongtienphong'];
   		}
 
 

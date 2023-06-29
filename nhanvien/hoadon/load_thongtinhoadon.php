@@ -38,15 +38,62 @@
   <input type="hidden" name="ngaydatphong" value="<?php echo $dp->ngaydatphong ?>">
   <input type="hidden" name="ngayketthuc" value="<?php echo $dp->ngayketthuc ?>">
   <input type="hidden" name="tongtienthanhtoan" value="<?php echo $tongtienthanhtoan ?>">
+  <input type="hidden" name="tongtienphong" value="<?php echo $tongtienphong ?>">
   <input type="hidden" name="tongtiensauthue" value="<?php echo $tongtiensauthue ?>">
   <input type="hidden" name="VAT" value="<?php echo $VAT ?>">
   <input type="hidden" name="VATthanhtoan" value="<?php echo $VATthanhtoan ?>">
   <input type="hidden" name="songaythue" value="<?php echo $songaythue->days ?>">
   <input type="hidden" name="phuthuloaikhach" value="<?php echo $phuthuloaikhach ?>">
   <input type="hidden" name="CMND" value="<?php echo $dp->CMND ?>">
+  <input type="hidden" name="tongtiendichvu" value="<?php echo $tongtiendichvu ?>">
+
 
   </div>
   <div style="border: solid 1px; padding:20px">
+    <table class="table">
+        <thead>
+          <tr>
+          <th></th>
+          <th scope="col">Tên dịch vụ</th>
+          <th scope="col">Giá trị</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Thành tiền</th>
+          
+          
+          </tr>
+        </thead>
+        <tbody>
+
+          <?php foreach ($ds_dv_dp as $key => $value): ?>
+            <tr>
+            <td></td>
+            <td><?php echo $value["tendichvu"] ?></td>
+            <td>
+              <?php echo $value['giatri'] ?>/<?php echo $value['donvi'] ?>
+            </td>
+            <td>
+              <?php echo $value['soluong'] ?>
+            </td>
+            <td>
+              <?php echo $value['thanhtien'] ?>
+            </td>
+           
+            
+          </tr>
+          <?php endforeach ?>
+          
+          
+          <tr>
+            <td>Tổng cộng :</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+            <td><?php echo $tongtiendichvu ?></td>
+          </tr>
+          
+        </tbody>
+      </table>
     <table class="table">
         <thead>
           <tr>

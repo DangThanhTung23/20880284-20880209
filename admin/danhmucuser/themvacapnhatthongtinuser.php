@@ -21,7 +21,7 @@
 		}
 		else
 		{
-			$tb="Dữ liệu nhập có vấn đề";
+			$tb="User name hoặc Email đã tồn tại";
 		}
 	}
 	
@@ -42,7 +42,7 @@
 			$tb = "Đã update thành công";
 		}
 		else{
-			$tb="Dữ liệu nhập có vấn đề";
+			$tb="Update thất bại";
 		}
 		if($_POST['user']==$_SESSION['user'])
 		{

@@ -18,17 +18,19 @@
 		public $songaythue;
 		public $phuthuloaikhach;
 		public $CMND;
-		
+		public $tongtienphong;
+		public $tongtiendichvu;
 	
 		
 		
 		public function luuhd()
 		{
 			$sql = "INSERT into hoadon (ID,datphongID,loaithanhtoan,tongtienthanhtoan,tenkhachhang,tennguoithanhtoan,
-			ngaydatphong,ngayketthuc,diachinguoithanhtoan,MST,stk,tongtiensauthue,VAT,VATthanhtoan,songaythue,phuthuloaikhach,CMND) VALUES
+			ngaydatphong,ngayketthuc,diachinguoithanhtoan,MST,stk,tongtiensauthue,VAT,VATthanhtoan,songaythue,phuthuloaikhach,CMND,tongtienphong,tongtiendichvu) VALUES
 			('$this->ID','$this->datphongID','$this->loaithanhtoan',$this->tongtienthanhtoan,'$this->tenkhachhang','$this->tennguoithanhtoan',
 			'$this->ngaydatphong','$this->ngayketthuc','$this->diachinguoithanhtoan','$this->MST','$this->stk',$this->tongtiensauthue,
-			$this->VAT,$this->VATthanhtoan,$this->songaythue,$this->phuthuloaikhach,'$this->CMND');";
+			$this->VAT,$this->VATthanhtoan,$this->songaythue,$this->phuthuloaikhach,'$this->CMND',$this->tongtienphong,$this->tongtiendichvu);";
+			//echo $sql;
 			
 			return $this->set_data($sql);
 		}
@@ -81,6 +83,8 @@
 				$this->songaythue = $value['songaythue'];
 				$this->phuthuloaikhach = $value['phuthuloaikhach'];
 				$this->CMND = $value['CMND'];
+				$this->tongtienphong = $value['tongtienphong'];
+				$this->tongtiendichvu = $value['tongtiendichvu'];
 			}
 			return $this;
 

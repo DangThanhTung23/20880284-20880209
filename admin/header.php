@@ -64,10 +64,10 @@
                         </li>
             </div>
             <div class="row">
-                <span class="pt-2"><?php  echo $_SESSION['user'] ?></span><a class="ml-3" href="index?action=exitAdmin"><button class="btn btn-outline-light my-2 my-sm-0 text-white">
+                <span class="pt-2"><?php  echo $_SESSION['user'] ?></span><a class="ml-3" href="index.php?action=exitAdmin"><button class="btn btn-outline-light my-2 my-sm-0 text-white">
                     Thoát
                 </button></a>
             </div>
         </div>
     </header>
-    <div class="container">
+    <div style="width:80%;margin:0 auto">

@@ -115,11 +115,57 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><?php echo $tongtienthanhtoan ?></td>
+            <td><?php echo $tongtienphong ?></td>
           </tr>
           
         </tbody>
       </table>
+  <div class="mt-5"><h5>Danh sách dịch vụ : </h5></div>
+  <table class="table">
+        <thead>
+          <tr>
+          <th></th>
+          <th scope="col">Tên dịch vụ</th>
+          <th scope="col">Giá trị</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Thành tiền</th>
+          
+          
+          </tr>
+        </thead>
+        <tbody>
+
+          <?php foreach ($ds_dv_dp as $key => $value): ?>
+            <tr>
+            <td></td>
+            <td><?php echo $value["tendichvu"] ?></td>
+            <td>
+              <?php echo $value['giatri'] ?>/<?php echo $value['donvi'] ?>
+            </td>
+            <td>
+              <?php echo $value['soluong'] ?>
+            </td>
+            <td>
+              <?php echo $value['thanhtien'] ?>
+            </td>
+           
+            
+          </tr>
+          <?php endforeach ?>
+          
+          
+          <tr>
+            <td>Tổng cộng :</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+            <td><?php echo $tongtiendichvu ?></td>
+          </tr>
+          
+        </tbody>
+      </table>
+
   <div class="mt-5 mb-5">
     <h5>Thông tin thanh toán : </h5>
       <div class="form-row">

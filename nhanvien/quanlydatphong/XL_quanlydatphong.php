@@ -3,7 +3,7 @@
 	$dsdp = $dp->docdanhsachdp();
 	$p_dp = new p_dpModel();
 	$dsp_dp = $p_dp->docdanhsachp_dp();
-	
+	$dv_dp = new dv_dpModel();
 
 
 	$key = "";
@@ -11,6 +11,7 @@
 	if(isset($_GET['xoadp'])&&isset($_GET['id']))
 	{
 		$dp->xoadatphongtheoid($_GET['id']);
+		$dv_dp->xoatheodatphongID($_GET['id']);
 	} 
 	if(isset($_GET['btn_timkiem']))
 	{

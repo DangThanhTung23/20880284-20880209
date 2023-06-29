@@ -172,14 +172,14 @@
 		public static function kiemtratrangthaiphongtheongay($id,$tungay,$denngay)
 		{
 			$conn = new connect();
-			$sql = "select * from phong,datphong,p_dp where
+			$sql = "select phong.phongID from phong,datphong,p_dp where
 			((datphong.ngaydatphong <= '$tungay' AND datphong.ngayketthuc >= '$tungay') 
 				OR (datphong.ngaydatphong <= '$denngay' and datphong.ngayketthuc>='$denngay')
 				OR (datphong.ngaydatphong >= '$tungay' AND datphong.ngayketthuc <= '$denngay'))
-				AND p_dp.datphongID = $id AND phong.phongID = p_dp.ID";
-			echo $sql;
+				AND p_dp.datphongID = '$id' AND phong.phongID = p_dp.phongID";
+			//echo $sql;
 			$ds = $conn->get_data($sql);
-			var_dump($ds);
+			//var_dump($ds);
 			
 			if(count($ds)>0)
 			{

@@ -64,11 +64,15 @@
                 <a class="nav-link" href="index.php?action=thongke">Thống kê</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="index.php?action=quydinh">Quy định</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="index.php?action=taikhoan">Tài khoản</a>
             </li>
+            
         </div>
         <div class="row">
-            <span class="pt-2"><?php  echo $_SESSION['user'] ?></span><a class="ml-3" href="index?action=exitNhanvien"><button class="btn btn-outline-light my-2 my-sm-0 text-white">
+            <span class="pt-2"><?php  echo $_SESSION['user'] ?></span><a class="ml-3" href="index.php?action=exitNhanvien"><button class="btn btn-outline-light my-2 my-sm-0 text-white">
                 Thoát
             </button></a>
         </div>

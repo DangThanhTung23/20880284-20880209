@@ -15,6 +15,9 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 	include "../models/thamsoModel.php";
 	include "../models/loaithanhtoanModel.php";
 	include "../models/p_hdModel.php";
+	include "../models/dichvuModel.php";
+	include "../models/dv_dpModel.php";
+
 
 	include "../lib/function.php";
 
@@ -32,6 +35,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 	switch ($action) {
 //quan ly dat phong
 		case "quanlydatphong":
+			unset($_SESSION['dichvu']);
 			include "quanlydatphong/XL_quanlydatphong.php";
 			include "quanlydatphong/load_quanlydatphong.php";
 			break;
@@ -95,7 +99,66 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 			include "thongke/XL_thongke.php";
 			include "thongke/load_thongke.php";
 			break;
+		
+		case "quydinh":	
+			include "quydinh/XL_quydinh.php";
+			include "quydinh/load_quydinh.php";
+			break;
 
+		
+	
+	
+		// case "xoathamso":
+		// 	$ts = new thamsoModel();
+		// 	if(isset($_GET["id"])&&$_GET['id']>0)
+		// 	{
+		// 		$ts->xoathamso($_GET['id']);
+		// 	}		
+		// 	include "quydinh/XL_quydinh.php";
+		// 	include "quydinh/load_quydinh.php";
+		// 	break;
+	
+		case "suathamso":
+			// $thamso = "";
+    		// $giatrithamso = "";
+			if(isset($_GET["id"])&&$_GET["id"]>0){
+				$ts = new thamsoModel();
+				$ts->timkiemtheoID($_GET["id"]);
+				$thamso = $ts->thamso;
+				$giatrithamso = $ts->giatri;
+				
+				$id = $ts->id;
+			}
+			include "quydinh/XL_quydinh.php";
+			include "quydinh/load_quydinh.php";
+			break;
+			
+		case "xoadichvu":
+			$dv = new dichvuModel();
+			if(isset($_GET["id"])&&$_GET['id']>0)
+			{
+				$dv->xoadichvu($_GET['id']);
+			}		
+			include "quydinh/XL_quydinh.php";
+			include "quydinh/load_quydinh.php";
+			break;
+	
+		case "suadichvu":
+			// $thamso = "";
+    		// $giatrithamso = "";
+			if(isset($_GET["id"])&&$_GET["id"]>0){
+				$dv = new dichvuModel();
+				$dv->timkiemtheoID($_GET["id"]);
+				$dichvu = $dv->tendichvu;
+				$giatridichvu = $dv->giatri;
+				$donvi = $dv->donvi;
+				
+				$id = $dv->id;
+			}
+			include "quydinh/XL_quydinh.php";
+			include "quydinh/load_quydinh.php";
+			break;
+	
 
 
 
@@ -138,7 +201,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==2)
 
 	}
 	else{
-		header('location: ../index');
+		header('location: ../index.php');
 	}
 	
  ?>

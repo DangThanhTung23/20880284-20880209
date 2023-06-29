@@ -1,7 +1,9 @@
 <?php
 	//var_dump($_SESSION);
 	//var_dump($_POST);
-	$tb = "";
+	if(isset($_GET['id']))
+	{
+		$tb = "";
 	$dp = new datphongModel();
 	$lkh = new loaikhachhangModel();
 	$dsloaikhach = $lkh->docdanhsachloaikhach();
@@ -14,6 +16,8 @@
 	$p_hd = new p_hdModel();
 	$tb = "";
 	$p = new phongModel();
+	$dv_dp = new dv_dpModel();
+	$ds_dv_dp = $dv_dp->docdanhsachtheodatphongID($_GET['id']);
 
 	$dsphong = $p_dp->timkiemphongtheoID($_GET['id']);
 
@@ -44,6 +48,7 @@
 		$hd->loaithanhtoan = $_POST['loaithanhtoan'];
 		$hd->ngaydatphong = $_POST['ngaydatphong'];
 		$hd->ngayketthuc = $_POST['ngayketthuc'];
+		$hd->tongtienphong = $_POST['tongtienphong'];
 		$hd->tongtienthanhtoan = $_POST['tongtienthanhtoan'];
 		$hd->tongtiensauthue = $_POST['tongtiensauthue'];
 		$hd->VAT = $_POST['VAT'];
@@ -51,6 +56,7 @@
 		$hd->songaythue = $_POST['songaythue'];
 		$hd->phuthuloaikhach = $_POST['phuthuloaikhach'];
 		$hd->CMND = $_POST['CMND'];
+		$hd->tongtiendichvu = $_POST['tongtiendichvu'];
 
 
 		//var_dump($dsphong);
@@ -194,34 +200,79 @@
 		$songaythue = date_diff($date1,$date2);
 		
 
+		// $ds_thanhtoan = $dsphong;
+		// $tongtienthanhtoan = 0;
+		// $phuthuloaikhach = 1.00;
+		// if($dp->loaikhachID==2){
+		// 	$phuthuloaikhach = $ds_ts[1]['giatri'];
+		// }
+
+
+		// //var_dump($ds_thanhtoan);
+		// foreach ($ds_thanhtoan as $key => $value) {
+		// 	$thanhtien = 1;
+		// 	$phuthusoluong = 1.00;
+		// 	$thanhtien = $value['giaphong'] * $songaythue->days;
+		// 	if($value['soluong']>$value['soluongtoida'])
+		// 	{
+		// 		$phuthusoluong = $ds_ts[0]['giatri'];						
+		// 	}
+		// 	$thanhtien = $thanhtien*$phuthusoluong;
+		// 	$ds_thanhtoan[$key]['phuthusoluong'] = $phuthusoluong;
+		// 	$ds_thanhtoan[$key]['thanhtien'] = $thanhtien;
+			
+			
+		// 	$tongtienthanhtoan+=$thanhtien;
+		// }	
+
+		// $tongtienthanhtoan*=$phuthuloaikhach;
 		$ds_thanhtoan = $dsphong;
 		$tongtienthanhtoan = 0;
-		$phuthuloaikhach = 1.00;
+		$tongtienphong = 0;
+		$phuthuloaikhach = 1;
 		if($dp->loaikhachID==2){
 			$phuthuloaikhach = $ds_ts[1]['giatri'];
 		}
 
 
 		//var_dump($ds_thanhtoan);
-		foreach ($ds_thanhtoan as $key => $value) {
-			$thanhtien = 1;
-			$phuthusoluong = 1.00;
-			$thanhtien = $value['giaphong'] * $songaythue->days;
-			if($value['soluong']>$value['soluongtoida'])
-			{
-				$phuthusoluong = $ds_ts[0]['giatri'];						
+		if(!empty($ds_thanhtoan))
+		{
+			foreach ($ds_thanhtoan as $key => $value) {
+				$thanhtien = 1;
+				$phuthusoluong = 1;
+				$thanhtien = $value['giaphong'] * $songaythue->days;
+				if($value['soluong']>$value['soluongtoida'])
+				{
+					$phuthusoluong = $ds_ts[0]['giatri'];
+					
+					$thanhtien = $thanhtien*$phuthusoluong;
+				}
+				
+				$ds_thanhtoan[$key]['phuthusoluong'] = $phuthusoluong;
+				$ds_thanhtoan[$key]['thanhtien'] = $thanhtien;
+				
+				
+				$tongtienphong+=$thanhtien;
 			}
-			$thanhtien = $thanhtien*$phuthusoluong;
-			$ds_thanhtoan[$key]['phuthusoluong'] = $phuthusoluong;
-			$ds_thanhtoan[$key]['thanhtien'] = $thanhtien;
-			
-			
-			$tongtienthanhtoan+=$thanhtien;
-		}	
+		}
 
-		$tongtienthanhtoan*=$phuthuloaikhach;
+			
+		$stk = "";
+
+		$tongtienphong*=$phuthuloaikhach;
+		$tongtienthanhtoan += $tongtienphong;
+		$tongtiendichvu = 0;
+		if(!empty($ds_dv_dp))
+		{
+			foreach ($ds_dv_dp as $key => $value) {
+				$tongtiendichvu+=$value['thanhtien'];
+			}
+		}
+		$tongtienthanhtoan+=$tongtiendichvu;
 		$VATthanhtoan = $tongtienthanhtoan*$VAT;
 		$tongtiensauthue = $tongtienthanhtoan+$VATthanhtoan;
+	}
 	}
 
  ?>

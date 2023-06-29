@@ -51,6 +51,50 @@
         <thead>
           <tr>
           <th></th>
+          <th scope="col">Tên dịch vụ</th>
+          <th scope="col">Giá trị</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Thành tiền</th>
+          
+          
+          </tr>
+        </thead>
+        <tbody>
+
+          <?php foreach ($ds_dv_dp as $key => $value): ?>
+            <tr>
+            <td></td>
+            <td><?php echo $value["tendichvu"] ?></td>
+            <td>
+              <?php echo $value['giatri'] ?>/<?php echo $value['donvi'] ?>
+            </td>
+            <td>
+              <?php echo $value['soluong'] ?>
+            </td>
+            <td>
+              <?php echo $value['thanhtien'] ?>
+            </td>
+           
+            
+          </tr>
+          <?php endforeach ?>
+          
+          
+          <tr>
+            <td>Tổng cộng :</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+            <td><?php echo $tongtiendichvu ?></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    <table class="table">
+        <thead>
+          <tr>
+          <th></th>
           <th scope="col">Tên Phòng</th>
           <th scope="col">Loại Phòng</th>
           <th scope="col">Giá phòng/1 ngày</th>
